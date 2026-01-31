@@ -1,10 +1,42 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
-import productsData from "./productsData";
 
 function App() {
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [products, setProducts] = useState([]);
+  //Получаем продукты через fetch запрос
+  useEffect(() => {
+    fetch("/products.json")
+      .then((res) => res.json())
+      .then((data) => setProducts(data))
+      .catch((err) => console.error("Ошибка загрузки товаров", err));
+  }, []);
+  const normalizedSearch = searchTerm.trim().toLowerCase();
 
+  const filteredProducts = products.filter(product =>
+    product.title.toLowerCase().includes(normalizedSearch)
+  );
+
+  
+  // Закрытие модалки по Esc
+  useEffect(() => {
+    if (!selectedProduct) return;
+    const handleEsc = (e) => {
+      if (e.key === "Escape") {
+        setSelectedProduct(null);
+      }
+    };
+    window.addEventListener("keydown", handleEsc);
+    return () => window.removeEventListener("keydown", handleEsc);
+  }, [selectedProduct]);
+
+  // Закрытие модалки по клику вне окна
+  const handleOutsideClick = (e) => {
+    if (e.target.classList.contains("modal")) {
+      setSelectedProduct(null);
+    }
+  };
   return (
     <div className="App">
       <h1>Магазин гаджетов</h1>
@@ -13,16 +45,18 @@ function App() {
         type="text"
         placeholder="Поиск товара"
         className="search-input"
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
       />
-
+      
       <div className="products-grid">
-        {productsData.map((product) => (
+        {filteredProducts.map((product) => (
           <div
             key={product.id}
             className="product-card"
             onClick={() => setSelectedProduct(product)}
           >
-            <div class="product-image">
+            <div className="product-image">
               <img src={product.image} alt={product.title} />
             </div>
             <h2>{product.title}</h2>
@@ -34,7 +68,7 @@ function App() {
       </div>
 
       {selectedProduct && (
-        <div className="modal">
+        <div className="modal" onClick={handleOutsideClick}>
           <div className="modal-content">
             <button className="close-button" onClick={() => setSelectedProduct(null)}>&#10005;</button>
             <div className="modal-image">

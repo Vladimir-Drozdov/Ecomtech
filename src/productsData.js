@@ -9,7 +9,7 @@ const productsData = [
   },
   {
     id: 2,
-    title: "Смарт‑лампа L50",
+    title: "Смарт-лампа L50",
     price: 1290,
     category: "Гаджеты",
     image: "img/smart-lamp-l50.jpeg",
@@ -25,7 +25,7 @@ const productsData = [
   },
   {
     id: 4,
-    title: "Смарт‑часы X100",
+    title: "Смарт-часы X100",
     price: 7490,
     category: "Гаджеты",
     image: "/img/smart-watch-x100.jpeg",
@@ -41,7 +41,7 @@ const productsData = [
   },
   {
     id: 6,
-    title: "Экшн‑камера C100",
+    title: "Экшн-камера C100",
     price: 8990,
     category: "Гаджеты",
     image: "/img/action-camera-c100.webp",
@@ -57,7 +57,7 @@ const productsData = [
   },
   {
     id: 8,
-    title: "Веб‑камера W100",
+    title: "Веб-камера W100",
     price: 2590,
     category: "Компьютерное",
     image: "/img/web-camera-w100.jpeg",
@@ -105,7 +105,7 @@ const productsData = [
   },
   {
     id: 14,
-    title: "Фитнес‑браслет F10",
+    title: "Фитнес-браслет F10",
     price: 2990,
     category: "Гаджеты",
     image: "img/fitness-bracelet-f10.jpeg",
@@ -113,7 +113,7 @@ const productsData = [
   },
   {
     id: 15,
-    title: "Смарт‑весы W200",
+    title: "Смарт-весы W200",
     price: 2190,
     category: "Гаджеты",
     image: "/img/smart-scale-w200.jpeg",
@@ -121,4 +121,3 @@ const productsData = [
   }
 ];
 
-export default productsData;
