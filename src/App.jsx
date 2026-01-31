@@ -5,9 +5,10 @@ function App() {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [products, setProducts] = useState([]);
+  const BASE = import.meta.env.BASE_URL;
   //Получаем продукты через fetch запрос
   useEffect(() => {
-    fetch("/products.json")
+    fetch(BASE + "/products.json")
       .then((res) => res.json())
       .then((data) => setProducts(data))
       .catch((err) => console.error("Ошибка загрузки товаров", err));
@@ -57,7 +58,7 @@ function App() {
             onClick={() => setSelectedProduct(product)}
           >
             <div className="product-image">
-              <img src={product.image} alt={product.title} />
+              <img src={BASE + product.image} alt={product.title} />
             </div>
             <h2>{product.title}</h2>
             <div className="product-footer">
@@ -72,7 +73,7 @@ function App() {
           <div className="modal-content">
             <button className="close-button" onClick={() => setSelectedProduct(null)}>&#10005;</button>
             <div className="modal-image">
-              <img src={selectedProduct.image} alt={selectedProduct.title} />
+              <img src={BASE + selectedProduct.image} alt={selectedProduct.title} />
             </div>
             <h2>{selectedProduct.title}</h2>
             <p className="modal-description">{selectedProduct.description}</p>
